@@ -19,7 +19,16 @@ from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'hrdb',            # Your database name
+        'USER': 'hr_abhijeet',         # Your database user
+        'PASSWORD': 'hr_668112',  # Your database user's password
+        'HOST': 'localhost',       # Or '127.0.0.1' if PostgreSQL is local
+        'PORT': '45432',            # Default PostgreSQL port
+    }
+}
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -30,7 +39,7 @@ env = environ.Env(
         "django-insecure-j8op9)1q8$1&0^s&p*_0%d#pr@w9qj@1o=3#@d=a(^@9@zd@%j",
     ),
     ALLOWED_HOSTS=(list, ["*"]),
-    CSRF_TRUSTED_ORIGINS=(list, ["http://localhost:8000"]),
+    CSRF_TRUSTED_ORIGINS=(list, ["http://localhost:8000","https://hr.sprilio.com"]),
 )
 
 env.read_env(os.path.join(BASE_DIR, ".env"), overwrite=True)
@@ -120,19 +129,13 @@ if env("DATABASE_URL", default=None):
     }
 else:
     DATABASES = {
-        "default": {
-            "ENGINE": env("DB_ENGINE", default="django.db.backends.sqlite3"),
-            "NAME": env(
-                "DB_NAME",
-                default=os.path.join(
-                    BASE_DIR,
-                    "TestDB_Horilla.sqlite3",
-                ),
-            ),
-            "USER": env("DB_USER", default=""),
-            "PASSWORD": env("DB_PASSWORD", default=""),
-            "HOST": env("DB_HOST", default=""),
-            "PORT": env("DB_PORT", default=""),
+        'default': {
+             'ENGINE': 'django.db.backends.postgresql',
+             'NAME': 'hrdb',            # Your database name
+             'USER': 'hr_abhijeet',         # Your database user
+             'PASSWORD': 'hr_668112',  # Your database user's password
+             'HOST': 'localhost',       # Or '127.0.0.1' if PostgreSQL is local
+             'PORT': '45432',            # Default PostgreSQL port
         }
     }
 
